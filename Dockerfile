@@ -8,7 +8,7 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 
-RUN yum update
+RUN yum -y update
 RUN yum -y install tinyproxy
 
 EXPOSE 80
