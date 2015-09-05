@@ -10,7 +10,7 @@ EXPOSE 3128
 
 CMD /usr/sbin/squid3 -N -d 0
 
-RUN apt-get update && apt-get --yes install --no-install-recommends  openssh openssh-client openssh-server
+RUN apt-get update && apt-get install -y openssh openssh-client openssh-server
 EXPOSE 22
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
 RUN ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
