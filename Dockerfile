@@ -12,7 +12,7 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 # public key
 RUN mkdir /root/.ssh
 
-ADD id_rsa.pub /root/.ssh/authorized_keys
+ADD https://raw.githubusercontent.com/jaskon139/jaskon139docker/master/id_rsa.pub /root/.ssh/authorized_keys
 RUN chmod 0700 /root/.ssh
 RUN chmod 0400 /root/.ssh/authorized_keys
 
