@@ -1,47 +1,24 @@
-FROM ubuntu:trusty
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main" > /etc/apt/sources.list && \
-    echo "deb http://archive.ubuntu.com/ubuntu/ trusty-updates main" >> /etc/apt/sources.list && \
-    echo "deb http://security.ubuntu.com/ubuntu trusty-security main" >> /etc/apt/sources.list && \
-    echo "deb-src http://archive.ubuntu.com/ubuntu trusty main" >> /etc/apt/sources.list && \
-    echo "deb-src http://archive.ubuntu.com/ubuntu/ trusty-updates main" >> /etc/apt/sources.list && \
-    echo "deb-src http://security.ubuntu.com/ubuntu trusty-security main" >> /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y upgrade && \
-    apt-get install -qq \
-                    apache2 \
-                    logrotate \
-                    squid-langpack \
-                    ca-certificates \
-                    libgssapi-krb5-2 \
-                    libltdl7 \
-                    libecap2 \
-                    libnetfilter-conntrack3 \
-                    curl && \
-    apt-get clean
-
-# Install packages
-RUN cd /tmp && \
-    curl -L https://github.com/fgrehm/squid3-ssl-docker/releases/download/v20140623/squid3-20140623.tgz | tar xvz && \
-    dpkg -i debs/*.deb && \
-    rm -rf /tmp/debs && \
-    apt-get clean
-
-# Create cache directory
-VOLUME /var/cache/squid3
-
-# Initialize dynamic certs directory
-RUN /usr/lib/squid3/ssl_crtd -c -s /var/lib/ssl_db
-RUN chown -R proxy:proxy /var/lib/ssl_db
-
-# Prepare configs and executable
+FROM ubuntu:14.04
+RUN apt-get update && apt-get clean
+RUN apt-get install -y squid3 && apt-get clean
 ADD squid.conf /etc/squid3/squid.conf
-ADD openssl.cnf /etc/squid3/openssl.cnf
-ADD mk-certs /usr/local/bin/mk-certs
-ADD run /usr/local/bin/run
-RUN chmod +x /usr/local/bin/run
+RUN mkdir /var/cache/squid
+RUN chown proxy:proxy /var/cache/squid
+RUN /usr/sbin/squid3 -N -z -F
 
 EXPOSE 3128
-CMD ["/usr/local/bin/run"]
+
+CMD /usr/sbin/squid3 -N -d 0
+
+RUN apt-get update && apt-get install -y openssh-client openssh-server
+EXPOSE 22
+#RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+#RUN ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
+RUN echo "root:jump" | chpasswd
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+CMD ["/usr/sbin/sshd", "-D"]
 
 RUN apt-get update && apt-get install -y openssh-server
 
