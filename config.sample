@@ -1,0 +1,6 @@
+proxyAddress = "0.0.0.0"    # IPv4 only指定监听地址
+proxyPort = 8123          #监听端口
+allowedClients = 0.0.0.0/0  #允许使用代理的客户
+daemonise = true              #放入后台
+pidFile = /etc/polipo/pid     #进程pid文件
+logFile = /etc/polipo/log     #日志文件
