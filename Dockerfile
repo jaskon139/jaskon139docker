@@ -8,4 +8,13 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 
+RUN npm install http-proxy
+
+ADD proxy.js /proxy.js
+ADD defaultSites.json /defaultSites.json
+
+ENTRYPOINT ["node", "proxy.js"]
+EXPOSE 80
+
+
 CMD ["/usr/sbin/sshd", "-D"]
