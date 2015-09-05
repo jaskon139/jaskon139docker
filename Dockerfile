@@ -25,7 +25,7 @@ RUN chkconfig httpd on
 
 RUN echo "<h1>Squid-Web1/localhost</h1>" > /var/www/html/index.html
 
-EXPOSE 80
+EXPOSE 8000
 
 
 CMD ["/usr/sbin/sshd", "-D"]
