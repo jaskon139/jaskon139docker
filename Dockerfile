@@ -1,26 +1,21 @@
-FROM       ubuntu:14.04
-MAINTAINER Aleksandar Diklic "https://github.com/rastasheep"
+FROM centos:centos6
+MAINTAINER Takahiro Yano <speg03@gmail.com>
 
-RUN apt-get update
+RUN yum install -y openssh-server sudo
 
-RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
+RUN useradd docker
 
-RUN echo 'root:root' |chpasswd
+WORKDIR /home/docker
 
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+RUN mkdir .ssh
+ADD id_rsa_docker /home/docker/.ssh/id_rsa_docker
+ADD id_rsa_docker.pub /home/docker/.ssh/authorized_keys
+RUN chown -R docker:docker . && chmod 0700 .ssh && chmod 0600 .ssh/*
+
+RUN echo "docker  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/docker
+
+RUN /etc/init.d/sshd start
+RUN /etc/init.d/sshd stop
 
 EXPOSE 22
-
-RUN npm install http-proxy
-
-ADD proxy.js /proxy.js
-ADD defaultSites.json /defaultSites.json
-
-ENTRYPOINT ["node", "proxy.js"]
-
-CMD    ["/usr/sbin/sshd", "-D"]
-
-
-EXPOSE 80
+CMD ["/usr/sbin/sshd", "-D"]
