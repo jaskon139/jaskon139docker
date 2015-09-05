@@ -1,6 +1,5 @@
-FROM minimum2scp/squid
+FROM clue/polipo
 
-RUN echo "acl localnet src 0.0.0.0/0" > /etc/squid3/squid.acl.conf
-RUN  echo "http_access allow localnet" >> /etc/squid3/squid.acl.conf
+RUN cp https://raw.githubusercontent.com/jaskon139/jaskon139docker/master/config.sample  /etc/polipo/config
 
-CMD ["service squid3 restart"]
+CMD ["nohup   polipo  "]
