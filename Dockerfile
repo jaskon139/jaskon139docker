@@ -7,9 +7,7 @@ RUN echo "root:jump" | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
-
-RUN yum -y update
-RUN yum -y install tinyproxy
+RUN yum -y install squid
 
 EXPOSE 80
 
