@@ -17,7 +17,9 @@ RUN squid start
 
 RUN yum -y install httpd
 
-RUN httpd start
+RUN chkconfig httpd on
+
+#RUN httpd start
 
 RUN chkconfig httpd on
 
