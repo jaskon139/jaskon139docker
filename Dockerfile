@@ -9,7 +9,7 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 
 RUN yum update
-RUN yum install tinyproxy
+RUN yum -y install tinyproxy
 
 EXPOSE 80
 
