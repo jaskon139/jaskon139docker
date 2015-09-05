@@ -9,7 +9,19 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 RUN yum -y install squid
 
-RUN /usr/local/squid/sbin/squid -z 
+RUN chkconfig --level 35 squid on
+
+RUN squid –z
+
+RUN /etc/init.d/squid start
+
+RUN yum -y install httpd
+
+RUN /etc/init.d/httpd start
+
+RUN chkconfig httpd on
+
+RUN echo "<h1>Squid-Web1/localhost</h1>" > /var/www/html/index.html
 
 EXPOSE 80
 
