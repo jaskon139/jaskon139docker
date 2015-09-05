@@ -11,7 +11,7 @@ CMD ["/usr/sbin/privoxy", "--no-daemon", "/etc/privoxy/config"]
 EXPOSE 8118
 
 
-RUN apt-get install -y openssh openssh-clients openssh-server
+RUN apt-get --yes install --no-install-recommends  openssh openssh-clients openssh-server
 EXPOSE 22
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
 RUN ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
