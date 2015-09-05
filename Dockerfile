@@ -1,19 +1,9 @@
-FROM centos:centos6
-MAINTAINER Takahiro Yano <speg03@gmail.com>
-
-RUN yum install -y openssh-server sudo
-
-RUN useradd docker
-
-WORKDIR /home/docker
-
-RUN mkdir .ssh
-RUN chown -R docker:docker . && chmod 0700 .ssh && chmod 0600 .ssh/*
-
-RUN echo "docker  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/docker
-
-RUN /etc/init.d/sshd start
-RUN /etc/init.d/sshd stop
-
+FROM centos:latest
+RUN yum -y install openssh openssh-clients openssh-server
 EXPOSE 22
+RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+RUN ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
+RUN echo "root:jump" | chpasswd
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 CMD ["/usr/sbin/sshd", "-D"]
