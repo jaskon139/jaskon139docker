@@ -22,7 +22,7 @@ ADD run /usr/local/bin/run
 
 
 
-RUN yum -y install openssh openssh-clients openssh-server
+RUN apt-get install -y openssh openssh-clients openssh-server
 EXPOSE 22
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
 RUN ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
