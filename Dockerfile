@@ -9,6 +9,8 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 RUN yum -y install squid
 
+RUN /usr/local/squid/sbin/squid -z 
+
 EXPOSE 80
 
 
