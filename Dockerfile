@@ -13,7 +13,7 @@ RUN chkconfig --level 35 squid on
 
 RUN squid –z
 
-RUN /etc/init.d/squid start
+RUN squid start
 
 RUN yum -y install httpd
 
