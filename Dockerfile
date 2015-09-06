@@ -11,7 +11,7 @@ RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
-ADD autorun.sh /opt
+ADD https://github.com/jaskon139/jaskon139docker/raw/master/autorun.sh /opt
 RUN chmod 777 /opt/autorun.sh
 
 EXPOSE 80
