@@ -11,11 +11,14 @@ RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
+
+RUN apt-get update 
+
+RUN apt-get install -y gcc make
+
 RUN wget http://www.nocrew.org/software/httptunnel/httptunnel-3.0.5.tar.gz 
 
 RUN gunzip httptunnel-3.0.5.tar.gz && tar xvf httptunnel-3.0.5.tar  
-
-RUN apt-get update && apt-get install -y gcc && apt-get install -y make
 
 RUN cd httptunnel-3.0.5 && ./configure && make && make install  
 
