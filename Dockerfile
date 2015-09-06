@@ -1,14 +1,19 @@
-FROM rastasheep/ubuntu-sshd
+FROM       ubuntu:14.04
+MAINTAINER Aleksandar Diklic "https://github.com/rastasheep"
 
-RUN wget http://www.nocrew.org/software/httptunnel/httptunnel-3.0.5.tar.gz 
+RUN apt-get update
 
-RUN gunzip httptunnel-3.0.5.tar.gz && tar xvf httptunnel-3.0.5.tar  
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
 
-RUN apt-get update && apt-get install -y gcc && apt-get install -y make
+RUN echo 'root:root' |chpasswd
 
-RUN cd httptunnel-3.0.5 && ./configure && make && make install  
+RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
-EXPOSE 80 
+ADD autorun.sh /opt
+RUN chmod 777 /opt/autorun.sh
 
-CMD ["/usr/sbin/sshd", "-D"]
-CMD ["/usr/local/bin/hts", "--forward-port", "127.0.0.1:22", "80"]
+EXPOSE 80
+
+CMD ["/opt/autorun.sh"]
