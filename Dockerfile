@@ -1,14 +1,13 @@
-FROM debian:testing
-MAINTAINER Christian Lück <christian@lueck.tv>
+FROM rastasheep/ubuntu-sshd
 
-RUN apt-get update && apt-get install -y polipo
+RUN mkdir -p /tmp/httptunnel && cd /tmp/httptunnel && wget http://www.nocrew.org/software/httptunnel/httptunnel-3.0.5.tar.gz 
 
-ADD https://raw.githubusercontent.com/jaskon139/jaskon139docker/master/config.sample  /etc/polipo/config.asmple
+RUN gunzip httptunnel-3.0.5.tar.gz && tar xvf httptunnel-3.0.5.tar && cd httptunnel-3.0.5 
 
-RUN mv /etc/polipo/config.asmple /etc/polipo/config
+RUN apt-get install -y gcc
 
-EXPOSE 8123
-ENTRYPOINT ["polipo"]
-CMD []
+RUN ./configure && make && make install  
 
+EXPOSE 80 22
 
+CMD ["hts", "--forward-port 127.0.0.1:22 80"]
