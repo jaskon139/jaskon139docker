@@ -10,4 +10,4 @@ RUN cd httptunnel-3.0.5 && ./configure && make && make install
 
 EXPOSE 80 22
 
-CMD ["hts", "--forward-port","127.0.0.1:22", "80"]
+CMD ["hts --forward-port 127.0.0.1:22 80"]
