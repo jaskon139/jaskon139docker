@@ -1,6 +1,6 @@
 FROM rastasheep/ubuntu-sshd
 
-RUN mkdir -p /tmp/httptunnel && cd /tmp/httptunnel && wget http://www.nocrew.org/software/httptunnel/httptunnel-3.0.5.tar.gz 
+RUN wget http://www.nocrew.org/software/httptunnel/httptunnel-3.0.5.tar.gz 
 
 RUN gunzip httptunnel-3.0.5.tar.gz && tar xvf httptunnel-3.0.5.tar && cd httptunnel-3.0.5 
 
