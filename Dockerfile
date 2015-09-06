@@ -16,4 +16,4 @@ RUN chmod 777 ./autorun.sh
 
 EXPOSE 80
 
-CMD ["/opt/autorun.sh"]
+CMD ["autorun.sh"]
