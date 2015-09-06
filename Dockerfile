@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y gcc && apt-get install -y make
 
 RUN cd httptunnel-3.0.5 && ./configure && make && make install  
 
-EXPOSE 80 22
+EXPOSE 80 
 
+CMD ["/usr/sbin/sshd", "-D"]
 CMD ["/usr/local/bin/hts", "--forward-port", "127.0.0.1:22", "80"]
