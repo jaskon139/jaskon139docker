@@ -14,6 +14,8 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 ADD https://github.com/jaskon139/jaskon139docker/raw/master/autorun.sh /bin/autorun.sh
 RUN chmod 777 /bin/autorun.sh
 
+COPY  /bin/autorun.sh /autorun.sh
+
 EXPOSE 80
 
-CMD ["/bin/autorun.sh"]
+CMD ["/autorun.sh"]
