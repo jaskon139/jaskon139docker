@@ -25,6 +25,8 @@ RUN cd httptunnel-3.0.5 && ./configure && make && make install
 ADD https://github.com/jaskon139/jaskon139docker/raw/master/autorun.sh /bin/autorun.sh
 RUN chmod 777 /bin/autorun.sh
 
+RUN apt-get install -y miredo
+
 EXPOSE 80
 
 CMD ["/bin/autorun.sh"]
