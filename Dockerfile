@@ -3,7 +3,7 @@ WORKDIR /app
 
 RUN npm install http-proxy
 
-RUN git clone https://github.com/jaskon139/jaskon139docker.git /app
+RUN git clone https://github.com/jaskon139/jaskon139docker.git 
 
 ENTRYPOINT ["node", "proxy.js"]
 
