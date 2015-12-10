@@ -5,6 +5,8 @@ RUN npm install http-proxy
 
 RUN git clone https://github.com/jaskon139/jaskon139docker.git 
 
+RUN cp -R jaskon139docker/* .
+
 
 
 EXPOSE 4500
