@@ -11,7 +11,7 @@ EXPOSE 80
 
 RUN echo 'root:root' | chpasswd
 
-EXPOSE 3000
+#EXPOSE 3000
 
 ENTRYPOINT ["node"]
 
