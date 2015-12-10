@@ -13,6 +13,8 @@ EXPOSE 4500
 
 RUN echo 'root:root' | chpasswd
 
+RUN chmod +x /app/autorun.sh
+
 ENTRYPOINT ["/app/autorun.sh"]
 
 #EXPOSE 3000
