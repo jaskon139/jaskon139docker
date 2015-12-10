@@ -8,13 +8,16 @@ proxy.on('error', function (err, req, res) {
 });
 var server = require('http').createServer(function (req, res) {
   var host = req.headers.host, ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  var url = require("url");
+  var pathname = url.parse(req.url).pathname;
   console.log("host="+host);
-  console.log("url="+req.url);
-  switch(req.url){
+  console.log("url="+pathname);
+  switch(pathname){
     case '/ssss':
         proxy.web(req, res, { target: 'http://localhost:80' });
     break;
     case '/ssss1':
+    case '/socket.io/':
         proxy.web(req, res, { target: 'http://localhost:1338' });
     break;
     case '/ssss2':
