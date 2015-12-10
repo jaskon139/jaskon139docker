@@ -5,11 +5,13 @@ RUN npm install http-proxy
 
 RUN git clone https://github.com/jaskon139/jaskon139docker.git 
 
-ENTRYPOINT ["node", "proxy.js"]
+
 
 EXPOSE 4500
 
 RUN echo 'root:root' | chpasswd
+
+ENTRYPOINT ["autorun.sh"]
 
 #EXPOSE 3000
 
