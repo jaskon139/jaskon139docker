@@ -1,5 +1,6 @@
 FROM krishnasrinivas/wetty
 WORKDIR /app
+RUN npm install http-proxy
 
 RUN echo 'root:root' | chpasswd
 
