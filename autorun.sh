@@ -3,4 +3,4 @@
 /etc/init.d/ssh start
 cd /app
 node app.js -p 3000 &
-node proxy.js
+node proxy.js > text.log 2>1
