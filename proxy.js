@@ -22,10 +22,13 @@ var server = require('http').createServer(function (req, res) {
     break;
     case '/ssss2':
     case '/wetty/socket.io/':
+    case '/wetty/hterm_all.js':
+    case '/wetty/socket.io/socket.io.js':
+    case '/wetty/wetty.js':
         proxy.web(req, res, { target: 'http://localhost:3000' });
     break;
     default:
-        proxy.web(req, res, { target: 'http://localhost:3000' });
+        proxy.web(req, res, { target: 'http://localhost:7800' });
 //        res.writeHead(200, {
 //            'Content-Type': 'text/plain'
 //        });
