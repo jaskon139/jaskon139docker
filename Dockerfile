@@ -1,6 +1,8 @@
 FROM krishnasrinivas/wetty
 WORKDIR /app
 
+RUN apt-get install openssh-server
+
 RUN npm install http-proxy
 
 RUN git clone https://github.com/jaskon139/jaskon139docker.git 
