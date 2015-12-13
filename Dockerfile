@@ -17,6 +17,8 @@ WORKDIR /app
 
 EXPOSE 4500
 
+EXPOSE 8888
+
 RUN echo 'root:root' | chpasswd
 
 RUN chmod +x /app/autorun.sh
