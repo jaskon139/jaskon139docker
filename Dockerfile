@@ -7,7 +7,7 @@ RUN git clone https://github.com/jaskon139/jaskon139docker.git
 
 RUN cp -R jaskon139docker/* .
 
-
+RUN git clone https://github.com/nodejitsu/node-http-proxy.git
 
 EXPOSE 4500
 
