@@ -1,7 +1,7 @@
 FROM krishnasrinivas/wetty
 WORKDIR /app
 
-RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server net-tools sudo
 
 RUN npm install http-proxy
 
