@@ -25,7 +25,7 @@ var server = require('http').createServer(function (req, res) {
         proxy.web(req, res, { target: 'http://localhost:3000' });
     break;
     default:
-        proxy.web(req, res, { target: 'http://localhost:7800' });
+        proxy.web(req, res, { target: 'http://localhost:3000' });
 //        res.writeHead(200, {
 //            'Content-Type': 'text/plain'
 //        });
