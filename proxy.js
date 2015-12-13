@@ -21,7 +21,7 @@ var server = require('http').createServer(function (req, res) {
         proxy.web(req, res, { target: 'http://localhost:1338' });
     break;
     case '/ssss2':
-    case '/wetty/socket.io/'
+    case '/wetty/socket.io/':
         proxy.web(req, res, { target: 'http://localhost:3000' });
     break;
     default:
