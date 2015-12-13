@@ -12,6 +12,7 @@ var server = require('http').createServer(function (req, res) {
   var pathname = url.parse(req.url).pathname;
   console.log("host="+host);
   console.log("url="+pathname);
+  
   switch(pathname){
     case '/ssss':
         proxy.web(req, res, { target: 'http://localhost:80' });
@@ -21,6 +22,7 @@ var server = require('http').createServer(function (req, res) {
         proxy.web(req, res, { target: 'http://localhost:1338' });
     break;
     case '/ssss2':
+        req.url='http://jaskon139-887.daoapp.io/';
     case '/wetty/socket.io/':
     case '/wetty/hterm_all.js':
     case '/wetty/socket.io/socket.io.js':
