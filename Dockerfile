@@ -9,6 +9,10 @@ RUN cp -R jaskon139docker/* .
 
 RUN git clone https://github.com/nodejitsu/node-http-proxy.git
 
+RUN cd node-http-proxy && npm install http-proxy
+
+WORKDIR /app
+
 EXPOSE 4500
 
 RUN echo 'root:root' | chpasswd
