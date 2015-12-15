@@ -1,7 +1,7 @@
 FROM krishnasrinivas/wetty
 WORKDIR /app
 
-RUN apt-get install -y openssh-server net-tools sudo tinyproxy
+RUN apt-get install -y openssh-server net-tools sudo tinyproxy httptunnel
 
 RUN npm install http-proxy
 
