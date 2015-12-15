@@ -17,7 +17,7 @@ WORKDIR /app
 
 EXPOSE 4500
 
-EXPOSE 8888
+EXPOSE 5000
 
 RUN echo 'root:root' | chpasswd
 
