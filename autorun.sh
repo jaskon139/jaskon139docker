@@ -6,4 +6,4 @@
 cd /app
 /usr/bin/python/python /app/http-tunnel/tunneld.py -p 80 &
 node app.js -p 3000 &
-node proxy.js > text.log 2>1
+node proxy.js 
