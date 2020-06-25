@@ -1,9 +1,7 @@
 FROM krishnasrinivas/wetty
 WORKDIR /app
 
-RUN apt-get update
-
-RUN apt-get install -y openssh-server net-tools sudo tinyproxy httptunnel git
+RUN  apk add --update  openssh-server net-tools sudo tinyproxy httptunnel git
 
 RUN git clone https://github.com/khuevu/http-tunnel.git
 
