@@ -1,11 +1,11 @@
 FROM krishnasrinivas/wetty
 WORKDIR /app
 
-RUN git clone https://github.com/khuevu/http-tunnel.git
-
 RUN apt-get update
 
-RUN apt-get install -y openssh-server net-tools sudo tinyproxy httptunnel
+RUN apt-get install -y openssh-server net-tools sudo tinyproxy httptunnel git
+
+RUN git clone https://github.com/khuevu/http-tunnel.git
 
 RUN npm install http-proxy
 
